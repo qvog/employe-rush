@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body>
+    <nav class="border-b border-gray-300">
+        <div class="max-w-6xl mx-auto py-2 px-6 xl:px-0 flex items-center justify-between">
+            <div class="menu-left flex items-center space-x-6">
+                <a href="#" class="py-4 text-lg text-black-800 font-semibold">
+                    <img src="https://sun9-23.userapi.com/impg/bu9ZEvAwaOLby453104YFHCVfAL0Ra3Xq8tQXA/DGIeqUuCzw0.jpg?size=645x85&quality=96&sign=2b5aa9eb1c73647adda3894e1b5e91a3&type=album" width="175" height="85" alt="NIKA">
+                </a>
+                <ul class="flex items-center space-x-4">
+                    <li><a href="#"class="font-mono text-black hover:text-gray-600">Доступные задания</a></li>
+                    <li><a href="#"class="font-mono text-black hover:text-gray-600">Рейтинг</a></li>
+                    <li><a href="#"class="font-mono text-black hover:text-gray-600">Список компаний</a></li>  
+                </ul>
+            </div>
+            <div class="menu-right flex items-center space-x-4">
+                <a href="#" class="text-black hover:text-gray-600">
+                    <button class="font-mono px-3 py-3 rounded-xl text-black bg-teal-200 hover:bg-teal-500">Для компаний</a>
+                    <button class="font-mono px-3 py-3 rounded-xl text-black bg-teal-200 hover:bg-teal-500">Для работников</a>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
