@@ -1,7 +1,7 @@
 from django.urls import path
 
-from . import views
+from core.views import FrontPageView
 
 urlpatterns = [
-    path('', views.frontpage, name='frontpage'),
+    path('', FrontPageView.as_view(), name='frontpage'),
 ]

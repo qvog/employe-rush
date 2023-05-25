@@ -11,7 +11,7 @@
     <nav class="border-b border-gray-300">
         <div class="max-w-6xl mx-auto py-2 px-6 xl:px-0 flex items-center justify-between">
             <div class="menu-left flex items-center space-x-6">
-                <a href="#" class="py-4 text-lg text-black-800 font-semibold">
+                <a href="{% url 'frontpage' %}" class="py-4 text-lg text-black-800 font-semibold">
                     <img src="https://sun9-23.userapi.com/impg/bu9ZEvAwaOLby453104YFHCVfAL0Ra3Xq8tQXA/DGIeqUuCzw0.jpg?size=645x85&quality=96&sign=2b5aa9eb1c73647adda3894e1b5e91a3&type=album" width="175" height="85" alt="NIKA">
                 </a>
                 <ul class="flex items-center space-x-4">
@@ -21,10 +21,21 @@
                 </ul>
             </div>
             <div class="menu-right flex items-center space-x-4">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'account_logout' %}" class="text-black hover:text-gray-600">
+                    <button class="font-mono px-3 py-3 rounded-xl text-black bg-teal-200 hover:bg-teal-500">Выход</a>
+                </a>
+                {% else %}
                 <a href="#" class="text-black hover:text-gray-600">
                     <button class="font-mono px-3 py-3 rounded-xl text-black bg-teal-200 hover:bg-teal-500">Для компаний</a>
+                </a>
+                <a href="{% url 'account_signup' %}" class="text-black hover:text-gray-600">
                     <button class="font-mono px-3 py-3 rounded-xl text-black bg-teal-200 hover:bg-teal-500">Для работников</a>
                 </a>
+                <a href="{% url 'account_login' %}" class="text-black hover:text-gray-600">
+                    <button class="font-mono px-3 py-3 rounded-xl text-black bg-teal-200 hover:bg-teal-500">Войти</a>
+                </a>
+                {% endif %}
             </div>
         </div>
     </nav>

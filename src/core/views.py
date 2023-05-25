@@ -1,5 +1,4 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-
-def frontpage(request):
-    return render(request, 'core/frontpage.html')
+class FrontPageView(TemplateView):
+    template_name = 'core/frontpage.html'
