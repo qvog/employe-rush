@@ -17,7 +17,11 @@
                 <ul class="flex items-center space-x-4">
                     <li><a href="#"class="font-mono text-black hover:text-gray-600">Доступные задания</a></li>
                     <li><a href="#"class="font-mono text-black hover:text-gray-600">Рейтинг</a></li>
-                    <li><a href="#"class="font-mono text-black hover:text-gray-600">Список компаний</a></li>  
+                    {% if request.user.type == "WORKER" %}
+                    <li><a href="{% url 'vacancies' %}"class="font-mono text-black hover:text-gray-600">Вакансии</a></li>
+                    {% else %}  
+                    <li><a href="#"class="font-mono text-black hover:text-gray-600">Список кандидатов</a></li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="menu-right flex items-center space-x-4">
