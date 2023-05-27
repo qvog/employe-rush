@@ -29,9 +29,13 @@ class Vacancy(models.Model):
     slug = models.SlugField(max_length=50, unique=True, null=True)
     discription = models.TextField(max_length=600, null=True)
     workhome = models.BooleanField(_("Work from home or not"), default=False)
+    created_at = models.DateTimeField(_("Date of publishing"), auto_now_add=True)
 
     experience = models.CharField(max_length=20, choices=EXPERIENCE.choices, blank=True)
     jobtype = models.CharField(max_length=20, choices=JOBTYPE.choices, blank=True)
+    
+    class Meta:
+        ordering = ('-created_at', )  
 
     def __str__(self):
         return self.name
