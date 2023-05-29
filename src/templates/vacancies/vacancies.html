@@ -2,10 +2,13 @@
 
 {% block content %}
 <div class="flex bg-sky-100 h-screen">
-    <div class="md:container md:mx-auto bg-white py-12 my-4">
-        <div class="border-b border-gray-300">
-            <div class="border-x-4 border-gray-300"></div>
+    <div class="relative md:container md:mx-auto bg-white py-12 my-4">
+        <div class="border-b-4 border-gray-300 my-12">
+            <div class="absolute left-1/2 -ml-0.5 w-0.5 h-screen bg-gray-400"></div>
         </div>
-    </div>
-</div>
+        <ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
+            {% for item in vacancies %}
+                {% include 'vacancies/partials/item_list_vacancy.html' %}
+            {% endfor %}
+        </ul>
 {% endblock %}

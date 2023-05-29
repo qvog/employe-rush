@@ -1,0 +1,24 @@
+<li class="pb-3 sm:pb-4">
+    <div class="flex items-center space-x-4">
+       <div class="flex-shrink-0">
+          <img class="w-8 h-8 rounded-full" src="https://cdn.sberdevices.ru/static/services/target/5d9b9ae7-305f-4d78-9f45-5e6b9597be90/ca858c65-8e7a-458c-8120-6882e9ff19b1.png" alt="Neil image">
+       </div>
+       <div class="flex-1 min-w-0">
+          <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
+             {{ item.name }}
+          </p>
+          <h1 class="text-2xl">
+            {{ item.company_name }}
+          </h1>
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            {{ item.city }} / Офисс / Возможно удаленно
+          </p>
+          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            {{ item.get_experience_display }}
+          </p>
+       </div>
+       <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+          От {{ item.salary }} рублей.
+       </div>
+    </div>
+</li>

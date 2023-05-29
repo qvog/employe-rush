@@ -24,6 +24,7 @@ class Vacancy(models.Model):
 
     category = models.ForeignKey(Category, related_name='vacancies', on_delete=models.CASCADE, null=True)
     name = models.CharField(_("Name of vacancie"), max_length=50, null=True)
+    company_name = models.CharField(_("Name of company"), max_length=50, null=True)
     city = models.CharField(_("The city of job"), max_length=50, null=True)
     salary = models.IntegerField(blank=True, null=True)
     slug = models.SlugField(max_length=50, unique=True, null=True)
