@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
                     <li><a href="#"class="font-mono text-black hover:text-gray-600">Доступные задания</a></li>
                     <li><a href="#"class="font-mono text-black hover:text-gray-600">Рейтинг</a></li>
                     {% if request.user.type == "WORKER" %}
-                    <li><a href="{% url 'vacancies' %}"class="font-mono text-black hover:text-gray-600">Вакансии</a></li>
+                    <li><a href="{% url 'vacancies:vacancies' %}"class="font-mono text-black hover:text-gray-600">Вакансии</a></li>
                     {% else %}  
                     <li><a href="#"class="font-mono text-black hover:text-gray-600">Список кандидатов</a></li>
                     {% endif %}
@@ -45,6 +46,9 @@
     </nav>
     <main>
         {% block content %}
+        {% endblock %}
+
+        {% block scripts %}
         {% endblock %}
     </main>
 </body>

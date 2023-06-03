@@ -28,7 +28,7 @@ class Vacancy(models.Model):
     city = models.CharField(_("The city of job"), max_length=50, null=True)
     salary = models.IntegerField(blank=True, null=True)
     slug = models.SlugField(max_length=50, unique=True, null=True)
-    discription = models.TextField(max_length=600, null=True)
+    description = models.TextField(max_length=600, null=True)
     workhome = models.BooleanField(_("Work from home or not"), default=False)
     created_at = models.DateTimeField(_("Date of publishing"), auto_now_add=True)
 
