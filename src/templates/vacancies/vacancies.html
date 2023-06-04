@@ -36,7 +36,7 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="relative vacancy-detail-container">
+        <div class="relative">
             <div class="absolute left-1/2 mx-8">
                 <div class="max-w-6xl mx-auto flex flex-wrap py-6 px-6 xl:px-0">
                     <div class="vacancy-detail-container information w-full lg:w-2/5 lg:p-6">
@@ -56,10 +56,13 @@
                 var vacancyId = $(this).data('id');
 
                 $.ajax({
-                    url: '/detail/' + vacancyId + '//',
+                    url: '/vacancies/' + vacancyId,
                     type: 'GET',
+                    dataType: 'json',
                     success: function(data) {
-                    $('.vacancy-detail-container').html(data);
+                    $('.vacancy-detail-container').html('<h2>' + data.name + '</h2>' + '<p>' + data.company_name + '</p>'
+                    + '<p>' + data.description + '</p>' + '<p>' + data.city + '</p>' + '<p>' + data.salary + '</p>' + '<p>'
+                    + data.experience + '</p>' + '<p>' + data.jobtype + '</p>');
                     },
                     error: function(response){
                         console.log('test')

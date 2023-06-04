@@ -10,15 +10,15 @@ class VacanciesPageView(ListView):
     context_object_name = 'vacancies'
 
 class VacancyDetailView(DetailView):
+    model = Vacancy
     def get(self, request, vacancy_id):
-        vacancy = Vacancy.object.get(pk=vacancy_id)
+        vacancy = Vacancy.objects.get(pk=vacancy_id)
         data = {
             'name': vacancy.name,
             'company_name': vacancy.company_name,
             'city': vacancy.city,
-            'description': vacancy.descrtiption,
+            'description': vacancy.description,
             'salary': vacancy.salary,
-            'workhome': vacancy.workhome,
             'experience': vacancy.experience,
             'jobtype': vacancy.jobtype
         }
