@@ -1,20 +1,20 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<div class="flex bg-sky-100 h-screen">
-    <div class="relative md:container md:mx-auto bg-white py-12 my-4">
-        <div class="border-b-4 border-gray-300 my-12">
+<div class="h-screen flex">
+    <div class="relative md:container md:mx-auto h-full bg-white py-12 my-4">
+        <div class="border-b-4 border-gray-300 my-6">
             <div class="absolute left-1/2 -ml-0.5 w-0.5 h-screen bg-gray-400"></div>
         </div>
         <div class="relative mx-8">
             <ul class="absolute inset-y-0 left-0 divide-y divide-gray-200 dark:divide-gray-700">
                 {% for vacancy in vacancies %}
-                <li class="pb-3 sm:pb-4">
+                <li class="px-16 pb-3 sm:pb-4">
                     <div class="flex items-center space-x-4">
                        <div class="flex-shrink-0">
                           <img class="w-8 h-8 rounded-full" src="https://cdn.sberdevices.ru/static/services/target/5d9b9ae7-305f-4d78-9f45-5e6b9597be90/ca858c65-8e7a-458c-8120-6882e9ff19b1.png" alt="Neil image">
                        </div>
-                       <div class="flex-2 min-w-0">
+                       <div class="flex-1 min-w-0">
                           <a href="#" class="vacancy-link flex text-xl font-medium text-gray-900 hover:text-gray-600 truncate dark:text-white" data-id="{{ vacancy.id }}">
                              {{ vacancy.name }}
                           </a>
@@ -28,7 +28,7 @@
                             {{ vacancy.get_experience_display }}
                           </p>
                        </div>
-                       <div class="w-1/5 inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                       <div class="break-keep w-1/12 font-semibold text-gray-900 dark:text-white">
                           От {{ vacancy.salary }} рублей.
                        </div>
                     </div>                                         
@@ -38,8 +38,18 @@
         </div>
         <div class="relative">
             <div class="absolute left-1/2 mx-8">
-                <div class="max-w-6xl mx-auto flex flex-wrap py-6 px-6 xl:px-0">
-                    <div class="vacancy-detail-container information w-full lg:w-2/5 lg:p-6">
+                <div class="max-w-6xl mx-auto flex flex-wrap py-4 px-4 xl:px-0">
+                    <div class="vacancy-detail-container w-full">
+                        <p class="vacancy-link-1 flex text-3xl font-medium text-gray-900 hover:text-gray-600 truncate">
+                        </p>
+                        <p class="vacancy-link-2 flex text-4xl font-medium text-gray-900 hover:text-gray-600 truncate">
+                        </p>
+                        <p class="vacancy-link-3 flex text-xl font-medium text-gray-600 truncate">
+                        </p>
+                        <p class="vacancy-link-4 flex text-xl font-medium my-6 text-black truncate">
+                        </p>
+                        <h class="vacancy-link-5 flex text-lg font-medium my-6 text-black">
+                        </p>
                     </div>
                 </div>
             </div>
@@ -50,22 +60,22 @@
 
     <script>
         $(function(){
-
             $(".vacancy-link").on( "click", function() {
                 event.preventDefault();
                 var vacancyId = $(this).data('id');
-
                 $.ajax({
                     url: '/vacancies/' + vacancyId,
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
-                    $('.vacancy-detail-container').html('<h2>' + data.name + '</h2>' + '<p>' + data.company_name + '</p>'
-                    + '<p>' + data.description + '</p>' + '<p>' + data.city + '</p>' + '<p>' + data.salary + '</p>' + '<p>'
-                    + data.experience + '</p>' + '<p>' + data.jobtype + '</p>');
+                    $('.vacancy-link-1').html(data.company_name);
+                    $('.vacancy-link-2').html(data.name);
+                    $('.vacancy-link-3').html(data.city);
+                    $('.vacancy-link-4').html('<p>От &nbsp </p>' + data.salary + '<p> &nbsp руб.</p>');
+                    $('.vacancy-link-5').html(data.description);
                     },
                     error: function(response){
-                        console.log('test')
+                        console.log('error')
                     },
             });
         });

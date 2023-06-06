@@ -23,12 +23,12 @@ class Vacancy(models.Model):
         TEMPORARY = "TEMPORARY", _("Временно")
 
     category = models.ForeignKey(Category, related_name='vacancies', on_delete=models.CASCADE, null=True)
-    name = models.CharField(_("Name of vacancie"), max_length=50, null=True)
-    company_name = models.CharField(_("Name of company"), max_length=50, null=True)
-    city = models.CharField(_("The city of job"), max_length=50, null=True)
+    name = models.CharField(_("Name of vacancie"), max_length=30, null=True)
+    company_name = models.CharField(_("Name of company"), max_length=30, null=True)
+    city = models.CharField(_("The city of job"), max_length=30, null=True)
     salary = models.IntegerField(blank=True, null=True)
     slug = models.SlugField(max_length=50, unique=True, null=True)
-    description = models.TextField(max_length=600, null=True)
+    description = models.TextField(max_length=1200, null=True)
     workhome = models.BooleanField(_("Work from home or not"), default=False)
     created_at = models.DateTimeField(_("Date of publishing"), auto_now_add=True)
 
