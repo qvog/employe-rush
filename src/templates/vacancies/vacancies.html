@@ -9,9 +9,9 @@
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
                 </div>
-                <input type="text" name="query" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" required>
+                <input type="text" name="query" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Search" required>
             </div>
-            <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-black bg-teal-200 hover:bg-teal-500 rounded-lg border focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-black bg-teal-200 hover:bg-teal-500 rounded-lg border focus:ring-4 focus:outline-none">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 <span class="sr-only">Search</span>
             </button>
@@ -27,23 +27,23 @@
                        <div class="flex-shrink-0">
                           <img class="w-8 h-8 rounded-full" src="https://cdn.sberdevices.ru/static/services/target/5d9b9ae7-305f-4d78-9f45-5e6b9597be90/ca858c65-8e7a-458c-8120-6882e9ff19b1.png" alt="Neil image">
                        </div>
-                       <div class="flex-1 min-w-0">
-                          <a href="#" class="vacancy-link flex text-xl font-medium text-gray-900 hover:text-gray-600 truncate dark:text-white" data-id="{{ vacancy.id }}">
-                             {{ vacancy.name }}
-                          </a>
-                          <a href="#" class="vacancy-link flex text-2xl text-gray-900 hover:text-gray-600">
-                            {{ vacancy.company_name }}
-                          </a>
-                          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            {{ vacancy.city }} / Офисс / Возможно удаленно
-                          </p>
-                          <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            {{ vacancy.get_experience_display }}
-                          </p>
-                       </div>
-                       <div class="break-keep w-1/12 font-semibold text-gray-900 dark:text-white">
-                          От {{ vacancy.salary }} рублей.
-                       </div>
+                        <div class="flex-1 min-w-0">
+                            <a href="#" class="vacancy-link flex text-xl font-medium text-gray-900 hover:text-gray-600 truncate dark:text-black" data-id="{{ vacancy.id }}">
+                                {{ vacancy.name }}
+                            </a>
+                            <a href="#" class="flex text-2xl text-gray-900 hover:text-gray-600">
+                                {{ vacancy.company_name }}
+                            </a>
+                            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                {{ vacancy.city }} / Офисс / Возможно удаленно
+                            </p>
+                            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                {{ vacancy.get_experience_display }}
+                            </p>
+                        </div>
+                    <div class="break-keep w-1/12 font-semibold text-gray-900 dark:text-black">
+                        От {{ vacancy.salary }} рублей.
+                    </div>
                     </div>                                         
                 </li>
                 {% endfor %}
@@ -63,6 +63,18 @@
                         </p>
                         <h class="vacancy-link-5 flex text-lg font-medium my-6 text-black">
                         </p>
+                    </div>
+                    <div class="inline-flex">
+                        <form action="#">
+                            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+                            Сохранить
+                            </button>
+                        </form>
+                        <form action="#">
+                            <button class="bg-teal-200 hover:bg-teal-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+                            Откликнуться
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -93,6 +105,6 @@
             });
         });
     })
-    </script>
+</script>
 
 {% endblock %}

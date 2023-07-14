@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
     'debug_toolbar',
+    'rest_framework',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
