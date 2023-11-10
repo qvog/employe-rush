@@ -13,6 +13,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STORAGE_SESSION_ID = 'storage'
+SESSION_COOKIE_AGE = 87000
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -32,6 +35,7 @@ INSTALLED_APPS = [
     'core',
     'users',
     'vacancies',
+    'storage',
 ]
 
 MIDDLEWARE = [

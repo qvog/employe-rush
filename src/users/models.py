@@ -20,6 +20,7 @@ class CustomUser(AbstractUser):
         if not self.id:
             self.type = self.base_type
         return super().save(*args, **kwargs)
+    
 
 class EmployerManager(models.Manager):
     def get_queryset(self, *args, **kwargs):
