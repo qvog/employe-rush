@@ -28,7 +28,7 @@
                           <img class="w-8 h-8 rounded-full" src="https://cdn.sberdevices.ru/static/services/target/5d9b9ae7-305f-4d78-9f45-5e6b9597be90/ca858c65-8e7a-458c-8120-6882e9ff19b1.png" alt="Neil image">
                        </div>
                         <div class="flex-1 min-w-0">
-                            <a href="#" class="vacancy-link flex text-xl font-medium text-gray-900 hover:text-gray-600 truncate dark:text-black" data-id="{{ vacancy.id }}">
+                            <a href="#" data-id="{{ vacancy.id }}" class="vacancy-link flex text-xl font-medium text-gray-900 hover:text-gray-600 truncate dark:text-black">
                                 {{ vacancy.name }}
                             </a>
                             <a href="#" class="flex text-2xl text-gray-900 hover:text-gray-600">
@@ -62,15 +62,18 @@
                         <p class="vacancy-link-4 flex text-xl font-medium my-6 text-black truncate">
                         </p>
                         <h class="vacancy-link-5 flex text-lg font-medium my-6 text-black">
+                        </h>
+                        <p class="vacancy-link-6 flex text-xl font-medium my-6 text-black truncate">
                         </p>
                     </div>
+                    {% csrf_token %}
                     <div class="inline-flex">
-                        <form action="#">
-                            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+                        <form id="#">
+                            <button class="button-add-link bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
                             Сохранить
                             </button>
                         </form>
-                        <form action="#">
+                        <form id="#">
                             <button class="bg-teal-200 hover:bg-teal-400 text-gray-800 font-bold py-2 px-4 rounded-r">
                             Откликнуться
                             </button>
@@ -85,9 +88,13 @@
 
     <script>
         $(function(){
+
+            var globalId = 0;
+
             $(".vacancy-link").on( "click", function() {
-                event.preventDefault();
                 var vacancyId = $(this).data('id');
+                globalId = vacancyId;
+                event.preventDefault();
                 $.ajax({
                     url: '/vacancies/' + vacancyId,
                     type: 'GET',
@@ -102,9 +109,29 @@
                     error: function(response){
                         console.log('error')
                     },
+                });
             });
-        });
-    })
-</script>
+
+            $(".button-add-link").on( "click", function() {
+                var currentId = globalId;
+                event.preventDefault();
+                $.ajax({
+                    url: '{% url "storage:storageapi" %}',
+                    type: 'POST',
+                    data: {
+                        vacancy: currentId,
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        action: 'add'
+                    },
+                    success: function (data) {
+                        console.log(data)
+                    },
+                    error: function (response) {
+                        console.log('error')
+                    },
+                });
+            })
+        })
+    </script>
 
 {% endblock %}

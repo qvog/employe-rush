@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .storage import Storage
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+
+from vacancies.models import Vacancy
 
 
 class StorageAPI(APIView):
@@ -14,6 +16,16 @@ class StorageAPI(APIView):
             status=status.HTTP_200_OK)
     
     def post(self, request, **kwargs):
+        storage = Storage(request)
+
+        if request.POST.get('action') == 'add':
+            vacancy_id = request.POST.get('vacancy')
+            storage.add(vacancy_id)
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return print('пиздец')
+
+        """
         storage = Storage(request)
 
         if "remove" in request.data:
@@ -33,3 +45,5 @@ class StorageAPI(APIView):
         return Response(
             {"message": "storage updated"},
             status=status.HTTP_202_ACCEPTED)
+        """
+    

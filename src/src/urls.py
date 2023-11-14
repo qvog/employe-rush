@@ -10,7 +10,7 @@ urlpatterns = [
     path('accounts/', include('users.urls')),
     path('accounts/', include('allauth.urls')),
     path('vacancies/', include('vacancies.urls')),
-    path('storage', StorageAPI.as_view(), name='storage'),
+    path('storage/', include('storage.urls')),
 ]
 
 if settings.DEBUG:

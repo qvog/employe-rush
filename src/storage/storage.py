@@ -15,11 +15,11 @@ class Storage:
     def save(self):
         self.session.modified = True
 
-    def add(self, vacancies, quantity=1):
-        vacancies_id = str(vacancies["id"])
+    def add(self, vacancies_id):
+        vacancies_id = str(vacancies_id)
         if vacancies_id not in self.storage:
             self.storage[vacancies_id] = {
-                "quantity": 0,
+                "id": vacancies_id,
             }
 
         self.save()

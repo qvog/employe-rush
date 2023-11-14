@@ -5,7 +5,6 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-from django.views.generic import ListView, DetailView, TemplateView
 
 from .models import Vacancy
 from .serializers import VacancySerializer
@@ -30,8 +29,6 @@ class VacanciesPageView(APIView):
         }
 
         return render(request, 'vacancies/vacancies.html', context)
-        #return Response({"data": self.serializer_class(vacancies, many=True).data},
-                        #status=status.HTTP_200_OK)
 
 class VacancyDetailAPI(APIView):
 
