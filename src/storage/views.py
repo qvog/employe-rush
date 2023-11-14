@@ -22,8 +22,11 @@ class StorageAPI(APIView):
             vacancy_id = request.POST.get('vacancy')
             storage.add(vacancy_id)
             return Response(status=status.HTTP_200_OK)
+        elif request.POST.get('action') == 'remove':
+            vacancy_id = request.POST.get('vacancy')
+            storage.remove(vacancy_id)
         else:
-            return print('пиздец')
+            pass
 
         """
         storage = Storage(request)
