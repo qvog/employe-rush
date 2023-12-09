@@ -1,0 +1,84 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="h-screen flex">
+    <div class="relative md:container md:mx-auto h-full bg-white py-6">
+        <div class="border-b-2 border-gray-400 my-6">
+            <div class="absolute left-1/2 -ml-0.5 w-0.5 h-screen bg-gray-400"></div>
+        </div>
+        <div class="relative mx-8">
+            <ul class="vacancies absolute inset-y-0 left-0 divide-y divide-gray-200 dark:divide-gray-700">
+                {% for item in storage %}
+                <li class="px-16 pb-3 sm:pb-4">
+                    {% include 'storage/partials/vacancy_single.html' %}                                      
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="relative">
+            <div class="absolute left-1/2 mx-8">
+                <div class="max-w-6xl mx-auto flex flex-wrap py-4 px-4 xl:px-0">
+                    <div class="vacancy-detail-container w-full">
+                        <p class="vacancy-link-1 flex text-3xl font-medium text-gray-900 hover:text-gray-600 truncate">
+                        </p>
+                        <p class="vacancy-link-2 flex text-4xl font-medium text-gray-900 hover:text-gray-600 truncate">
+                        </p>
+                        <p class="vacancy-link-3 flex text-xl font-medium text-gray-600 truncate">
+                        </p>
+                        <p class="vacancy-link-4 flex text-xl font-medium my-6 text-black truncate">
+                        </p>
+                        <h class="vacancy-link-5 flex text-lg font-medium my-6 text-black">
+                        </h>
+                        <p class="vacancy-link-6 flex text-xl font-medium my-6 text-black truncate">
+                        </p>
+                    </div>
+                    {% if request.GET.get == 'vacancy-link-1'%}
+                    <div class="inline-flex">
+                        <form id="#">
+                            <button class="button-add-link bg-red-300 hover:bg-red-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+                            Удалить
+                            </button>
+                        </form>
+                        <form id="#">
+                            <button class="bg-teal-200 hover:bg-teal-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+                            Откликнуться
+                            </button>
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+        $(function(){
+
+            var globalId = 0;
+
+            $(".vacancy-link").on( "click", function() {
+                var vacancyId = $(this).data('id');
+                globalId = vacancyId;
+                event.preventDefault();
+                $.ajax({
+                    url: '/vacancies/' + vacancyId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                    $('.vacancy-link-1').html(data.company_name);
+                    $('.vacancy-link-2').html(data.name);
+                    $('.vacancy-link-3').html(data.city);
+                    $('.vacancy-link-4').html('<p>От &nbsp </p>' + data.salary + '<p> &nbsp руб.</p>');
+                    $('.vacancy-link-5').html(data.description);
+                    },
+                    error: function(response){
+                        console.log('error')
+                    },
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

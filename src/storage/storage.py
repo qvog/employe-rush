@@ -35,9 +35,9 @@ class Storage:
         vacancies_ids = self.storage.keys()
         vacancies = Vacancy.objects.filter(id__in=vacancies_ids)
         storage = self.storage.copy()
-        for vac in vacancies:
-            storage[str(vac.id)]['vacancies'] = VacancySerializer(vac).data
-        for item in self.storage.values():
+        for vacancy in vacancies:
+            storage[str(vacancy.id)]['vacancies'] = VacancySerializer(vacancy).data
+        for item in storage.values():
             yield item
 
     def clear(self):

@@ -1,19 +1,28 @@
-from django.shortcuts import render, get_object_or_404
 from .storage import Storage
+from vacancies.models import Vacancy
+
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import TemplateView
+from django.http import JsonResponse
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
-from vacancies.models import Vacancy
+from rest_framework.permissions import IsAuthenticated
 
 
 class StorageAPI(APIView):
-    def get(self, request, format=None):
+    permission_classes = [IsAuthenticated]
+    context_object_name = 'storage'
+
+    def get(self, request):
         storage = Storage(request)
 
-        return Response ({"data": (storage.__iter__())},
-            status=status.HTTP_200_OK)
+        context = {
+            'storage': storage,
+        }
+
+        return render(request, 'storage/savedvacancies.html', context)
     
     def post(self, request, **kwargs):
         storage = Storage(request)
@@ -49,4 +58,3 @@ class StorageAPI(APIView):
             {"message": "storage updated"},
             status=status.HTTP_202_ACCEPTED)
         """
-    

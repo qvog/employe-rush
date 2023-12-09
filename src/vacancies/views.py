@@ -12,7 +12,6 @@ from .serializers import VacancySerializer
 
 class VacanciesPageView(APIView):
     model = Vacancy
-    template_name = 'vacancies/vacancies.html'
     context_object_name = 'vacancies'
 
     serializer_class = VacancySerializer
@@ -31,13 +30,12 @@ class VacanciesPageView(APIView):
         return render(request, 'vacancies/vacancies.html', context)
 
 class VacancyDetailAPI(APIView):
-
     permission_classes = [IsAuthenticated]
 
     def get(self, request, vacancy_id):
         vacancy = Vacancy.objects.get(id=vacancy_id)
         serializer = VacancySerializer(vacancy)
-        
+
         return Response(serializer.data)
     
     def post(self, request, *args, **kwargs):
@@ -45,7 +43,7 @@ class VacancyDetailAPI(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.data)
     
     
     

@@ -21,7 +21,6 @@ class CustomUser(AbstractUser):
             self.type = self.base_type
         return super().save(*args, **kwargs)
     
-
 class EmployerManager(models.Manager):
     def get_queryset(self, *args, **kwargs):
         return super().get_queryset(*args, **kwargs).filter(type=CustomUser.Types.EMPLOYER)

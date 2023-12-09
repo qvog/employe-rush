@@ -6,5 +6,5 @@ from storage.views import StorageAPI
 app_name = 'storage'
 
 urlpatterns = [
-    path('', StorageAPI.as_view(), name='storageapi'),
+    path('', StorageAPI.as_view(), name='savedvacancies.html'),
 ]

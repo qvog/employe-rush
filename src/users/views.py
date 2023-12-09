@@ -14,7 +14,7 @@ class WorkerSignupView(SignupView, TemplateView):
     template_name = 'users/worksignup.html'
     form_class = WorkerSignupForm
 
-class WorkerLoginView(LoginView):
+class WorkerLoginView(LoginView, TemplateView):
     template_name = 'users/worklogin.html'
 
 class UserRedirectView(LoginRequiredMixin, RedirectView):
