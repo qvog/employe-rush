@@ -21,7 +21,7 @@ class StorageAPI(APIView):
         context = {
             'storage': storage,
         }
-
+        
         return render(request, 'storage/savedvacancies.html', context)
     
     def post(self, request, **kwargs):
@@ -30,12 +30,14 @@ class StorageAPI(APIView):
         if request.POST.get('action') == 'add':
             vacancy_id = request.POST.get('vacancy')
             storage.add(vacancy_id)
-            return Response(status=status.HTTP_200_OK)
         elif request.POST.get('action') == 'remove':
             vacancy_id = request.POST.get('vacancy')
             storage.remove(vacancy_id)
+            response = render(request, 'storage/savedvacancies.html')
         else:
             pass
+
+        return response
 
         """
         storage = Storage(request)

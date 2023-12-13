@@ -9,9 +9,11 @@
         <div class="relative mx-8">
             <ul class="vacancies absolute inset-y-0 left-0 divide-y divide-gray-200 dark:divide-gray-700">
                 {% for item in storage %}
+                {% with vacancy=item.vacancies %}
                 <li class="px-16 pb-3 sm:pb-4">
                     {% include 'storage/partials/vacancy_single.html' %}                                      
                 </li>
+                {% endwith %}
                 {% endfor %}
             </ul>
         </div>
@@ -32,20 +34,16 @@
                         <p class="vacancy-link-6 flex text-xl font-medium my-6 text-black truncate">
                         </p>
                     </div>
-                    {% if request.GET.get == 'vacancy-link-1'%}
                     <div class="inline-flex">
-                        <form id="#">
-                            <button class="button-add-link bg-red-300 hover:bg-red-400 text-gray-800 font-bold py-2 px-4 rounded-l">
-                            Удалить
+                        <form id="success">
+                            <button class="button-remove-link">
                             </button>
                         </form>
-                        <form id="#">
-                            <button class="bg-teal-200 hover:bg-teal-400 text-gray-800 font-bold py-2 px-4 rounded-r">
-                            Откликнуться
+                        <form id="success">
+                            <button class="button-reply-link">
                             </button>
                         </form>
                     </div>
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -72,12 +70,35 @@
                     $('.vacancy-link-3').html(data.city);
                     $('.vacancy-link-4').html('<p>От &nbsp </p>' + data.salary + '<p> &nbsp руб.</p>');
                     $('.vacancy-link-5').html(data.description);
+
+                    $('.button-reply-link').html('<button class=bg-gray-300> Откликнуться </button>');
+                    $('.button-remove-link').html('<button class=bg-red-400> Удалить </button>');
                     },
                     error: function(response){
                         console.log('error')
                     },
                 });
             });
+            $(".button-remove-link").on( "click", function() {
+                var currentId = globalId;
+                event.preventDefault();
+                $.ajax({
+                    url: '{% url "storage:savedvacancies.html" %}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        vacancy: currentId,
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        action: 'remove'
+                    },
+                    success: function (data) {
+                        console.log(data)
+                    },
+                    error: function (response) {
+                        console.log('error')
+                    },
+                });
+            })
         });
     </script>
 

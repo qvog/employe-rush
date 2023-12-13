@@ -24,11 +24,11 @@ class Storage:
 
         self.save()
 
-    def remove(self, vacancies):
-        vacancies_id = str(vacancies["id"])
+    def remove(self, vacancies_id):
+        vacancies_id = str(vacancies_id)
 
-        if vacancies_id in self.cart:
-            del self.cart[vacancies_id]
+        if vacancies_id in self.storage:
+            del self.storage[vacancies_id]
             self.save()
 
     def __iter__(self):
