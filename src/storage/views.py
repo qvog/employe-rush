@@ -1,13 +1,9 @@
 from .storage import Storage
-from vacancies.models import Vacancy
 
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView
-from django.http import JsonResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 
 from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
 
@@ -30,6 +26,7 @@ class StorageAPI(APIView):
         if request.POST.get('action') == 'add':
             vacancy_id = request.POST.get('vacancy')
             storage.add(vacancy_id)
+            response = render(request, 'storage/savedvacancies.html')
         elif request.POST.get('action') == 'remove':
             vacancy_id = request.POST.get('vacancy')
             storage.remove(vacancy_id)

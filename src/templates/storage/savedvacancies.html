@@ -34,15 +34,13 @@
                         <p class="vacancy-link-6 flex text-xl font-medium my-6 text-black truncate">
                         </p>
                     </div>
-                    <div class="inline-flex">
-                        <form id="success">
-                            <button class="button-remove-link">
-                            </button>
-                        </form>
-                        <form id="success">
-                            <button class="button-reply-link">
-                            </button>
-                        </form>
+                    <div class="inline-flex" id="success" style="display: none;">
+                        <button class="button-remove-link font-mono px-3 py-3 rounded-xl text-black bg-red-200 hover:bg-red-300"> 
+                            Удалить 
+                        </button>
+                        <button class="font-mono px-3 py-3 rounded-xl text-black bg-teal-300 hover:bg-teal-400"> 
+                            Откликнуться 
+                        </button>
                     </div>
                 </div>
             </div>
@@ -59,20 +57,21 @@
             $(".vacancy-link").on( "click", function() {
                 var vacancyId = $(this).data('id');
                 globalId = vacancyId;
+                document.getElementById("success").style.display = "block";
                 event.preventDefault();
                 $.ajax({
                     url: '/vacancies/' + vacancyId,
                     type: 'GET',
                     dataType: 'json',
+                    data: {
+                        action: 'add'
+                    },
                     success: function(data) {
                     $('.vacancy-link-1').html(data.company_name);
                     $('.vacancy-link-2').html(data.name);
                     $('.vacancy-link-3').html(data.city);
                     $('.vacancy-link-4').html('<p>От &nbsp </p>' + data.salary + '<p> &nbsp руб.</p>');
-                    $('.vacancy-link-5').html(data.description);
-
-                    $('.button-reply-link').html('<button class=bg-gray-300> Откликнуться </button>');
-                    $('.button-remove-link').html('<button class=bg-red-400> Удалить </button>');
+                    $('.vacancy-link-5').html(data.description);;
                     },
                     error: function(response){
                         console.log('error')
@@ -91,11 +90,8 @@
                         csrfmiddlewaretoken: '{{ csrf_token }}',
                         action: 'remove'
                     },
-                    success: function (data) {
-                        console.log(data)
-                    },
                     error: function (response) {
-                        console.log('error')
+                        window.location.reload();
                     },
                 });
             })

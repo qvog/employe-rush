@@ -42,7 +42,8 @@
                         </svg>                          
                     </a>
                 </a>
-                <a href="{% url 'account_logout' %}" class="text-black hover:text-gray-600">
+                <a href="{% url 'account_logout' %}" method="POST" class="text-black hover:text-gray-600">
+                    {% csrf_token %}
                     <button class="font-mono px-3 py-3 rounded-xl text-black bg-teal-200 hover:bg-teal-500">Выход</a>
                 </a>
                 {% else %}

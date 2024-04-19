@@ -46,15 +46,13 @@
                         </p>
                     </div>
                     {% csrf_token %}
-                    <div class="inline-flex">
-                        <form id="success">
-                            <button class="button-add-link">
-                            </button>
-                        </form>
-                        <form id="success">
-                            <button class="button-reply-link">
-                            </button>
-                        </form>
+                    <div class="inline-flex" id="success" style="display: none;">
+                        <button class="button-add-link font-mono px-3 py-3 rounded-xl text-black bg-emerald-200 hover:bg-emerald-300"> 
+                            Сохранить
+                        </button>
+                        <button class="button-reply-link font-mono px-3 py-3 rounded-xl text-black bg-teal-300 hover:bg-teal-400"> 
+                            Откликнуться
+                        </button>
                     </div>
                 </div>
             </div>
@@ -71,6 +69,7 @@
             $(".vacancy-link").on( "click", function() {
                 var vacancyId = $(this).data('id');
                 globalId = vacancyId;
+                document.getElementById("success").style.display = "block";
                 event.preventDefault();
                 $.ajax({
                     url: '/vacancies/' + vacancyId,
@@ -83,9 +82,6 @@
                     $('.vacancy-link-4').html('<p>От &nbsp </p>' + data.salary + 
                     '<p> &nbsp руб.</p>');
                     $('.vacancy-link-5').html(data.description);
-
-                    $('.button-reply-link').html('<button class=bg-gray-300> Откликнуться </button>');
-                    $('.button-add-link').html('<button class=bg-teal-200> Сохранить </button>');
                     },
                     error: function(response){
                         console.log('error')
