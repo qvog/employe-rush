@@ -1,0 +1,52 @@
+{% extends 'main.html' %}
+
+{% block title %} Мой профиль {% endblock %}
+
+{% block content %}
+
+<div class="max-w-6xl mx-auto p-6 px-6">
+    <h1 class="mb-6 text-4xl">Мое Резюме</h1>
+    <div class="mx-auto">
+        <div class="mb-6 text-2xl">
+            <strong> Логин: </strong> {{ request.user.username }} <br>
+            <strong> E-mail: </strong> {{ request.user.type }}  <br>
+            <strong> Должность: </strong> Backend Developer <br>
+            <strong> Город: </strong> Москва <br>
+            <strong> Готов ли к переезду: </strong> Да <br>
+            <strong> Доп инфо: </strong> инфо <br>
+            <strong> Имя: </strong> Evgeniy <br>
+            <strong> Фамилия: </strong> Dyatlov <br>
+            <a href="#" class="absolute top-48 right-64 h-200 w-200 ">
+                <img class="hover:shadow-lg rounded-xl" src="https://pm1.aminoapps.com/8283/8c6c8805ac73a9c90f0fbfa6b3758b40b88b1c80r1-800-802v2_uhq.jpg" width="200" height="200">
+            </a>
+        </div>
+    </div>
+    <h2 class="my-6 text-2xl">Опыт работы:</h2>
+    <div class="w-full mb-6 p-5 flex flex-wrap bg-gray-100 rounded-xl">
+        <div class="mb-6 w-full">
+            <div class="product mb-6 flex pr-6">
+                <div class="w-3/4 pl-6">
+                    <div class="flex justify-between">
+                        <a href="#" class="text-2xl">Сбербанк</a>
+                    </div>
+
+                    <hr>
+
+                    <div class="mt-6 text-2xl">
+                        Инженер-программист Golang
+                    </div>
+                </div>
+
+                <div>
+                    <p class="text-2xl">Дата: 27.04.2222</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href=#>
+        <button class="py-4 px-6 rounded-xl text-white bg-gray-900 hover:bg-black ">Редактировать</button>
+    </a>
+</div>
+
+
+{% endblock %}

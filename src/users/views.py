@@ -7,15 +7,30 @@ from django.views.generic import RedirectView, TemplateView
 from users.forms import EmployerSignupForm, WorkerSignupForm
 
 class EmployerSignupView(SignupView, TemplateView):
-    template_name = 'users/empsignup.html'
+    template_name = 'users/employer/empsignup.html'
     form_class = EmployerSignupForm
 
+    def get_context_data(self, **kwargs):
+        kwargs['employer_form'] = EmployerSignupForm
+        return super().get_context_data(**kwargs) 
+
 class WorkerSignupView(SignupView, TemplateView):
-    template_name = 'users/worksignup.html'
+    template_name = 'users/worker/worksignup.html'
     form_class = WorkerSignupForm
 
+    def get_context_data(self, **kwargs):
+        kwargs['worker_form'] = WorkerSignupForm
+        return super().get_context_data(**kwargs) 
+
 class WorkerLoginView(LoginView, TemplateView):
-    template_name = 'users/worklogin.html'
+    template_name = 'users/worker/worklogin.html'
+
+class WorkerProfile(LoginRequiredMixin, TemplateView):
+    template_name = 'users/worker/workprofile.html'
+
+class EmployerProfile(LoginRequiredMixin, TemplateView):
+    template_name = 'users/employer/emprofile.html'
+
 
 class UserRedirectView(LoginRequiredMixin, RedirectView):
     permanent = False
