@@ -94,3 +94,6 @@ db.sqlite3
 todo.txt
 pass.txt
 test.py
+
+os
+sys

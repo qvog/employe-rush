@@ -14,7 +14,7 @@ class CustomUser(AbstractUser):
     name = models.CharField(blank=True, max_length=255)
 
     def get_absolute_url(self):
-        return reverse("user_detail", kwargs={"username": self.username})
+        return reverse("users_detail", kwargs={"username": self.username})
     
     def save(self, *args, **kwargs):
         if not self.id:
@@ -28,6 +28,9 @@ class EmployerManager(models.Manager):
 class WorkerManager(models.Manager):
     def get_queryset(self, *args, **kwargs):
         return super().get_queryset(*args, **kwargs).filter(type=CustomUser.Types.WORKER)
+    
+class EmployerMore(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
 class Employer(CustomUser):
     base_type = CustomUser.Types.EMPLOYER
@@ -35,6 +38,9 @@ class Employer(CustomUser):
     
     class Meta:
         proxy = True
+
+class WorkerMore(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
 class Worker(CustomUser):
     base_type = CustomUser.Types.WORKER

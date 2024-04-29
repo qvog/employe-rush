@@ -1,7 +1,15 @@
 from django.urls import path, include
 from django.contrib.auth import views
 
-from users.views import UserRedirectView, EmployerSignupView, WorkerSignupView, WorkerLoginView, WorkerProfile, EmployerProfile
+from users.views import (
+    UserRedirectView, 
+    WorkerSignupView, 
+    WorkerLoginView, 
+    WorkerProfile, 
+    EmployerProfile, 
+    EmployerSignupView
+    )
+
 
 app_name = 'users'
 

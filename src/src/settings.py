@@ -142,6 +142,6 @@ ACCOUNT_FORMS = {
     "reset_password_from_key": "allauth.account.forms.ResetPasswordKeyForm",
     "disconnect": "allauth.socialaccount.forms.DisconnectForm",
     # Custom signup form
-    "signup_emp": "users.forms.EmployerSignupForm",
-    "signup": "users.forms.WorkerSignupForm",
+    "empsignup": "users.forms.EmployerSignupForm",
+    "worksignup": "users.forms.WorkerSignupForm",
 }

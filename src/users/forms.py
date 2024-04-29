@@ -1,8 +1,9 @@
-from allauth.account.forms import LoginForm, SignupForm
+from django import forms as d_forms
+from allauth.account.forms import SignupForm
 from django.contrib.auth import get_user_model, forms
-from django.http import HttpResponse
 
-from .models import Employer, Worker, CustomUser
+from .models import CustomUser
+
 
 User = get_user_model()
 
@@ -12,25 +13,18 @@ class UserChangeForm(forms.UserChangeForm):
 
 class EmployerSignupForm(SignupForm):
 
-    class Meta:
-        model = Employer
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def type_employer(self, request, user):
+    def custom_signup(self, request, user):
         user.type = CustomUser.Types.EMPLOYER
         user.save()
-        return HttpResponse(print('pizda'))    
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
 class WorkerSignupForm(SignupForm):
 
-    class Meta:
-        model = Worker
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def type_worker(self, user):
+    def custom_signup(self, request, user):
         user.type = CustomUser.Types.WORKER
         user.save()
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)

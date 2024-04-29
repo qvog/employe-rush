@@ -6,6 +6,7 @@ from django.views.generic import RedirectView, TemplateView
 
 from users.forms import EmployerSignupForm, WorkerSignupForm
 
+
 class EmployerSignupView(SignupView, TemplateView):
     template_name = 'users/employer/empsignup.html'
     form_class = EmployerSignupForm
@@ -20,7 +21,7 @@ class WorkerSignupView(SignupView, TemplateView):
 
     def get_context_data(self, **kwargs):
         kwargs['worker_form'] = WorkerSignupForm
-        return super().get_context_data(**kwargs) 
+        return super().get_context_data(**kwargs)
 
 class WorkerLoginView(LoginView, TemplateView):
     template_name = 'users/worker/worklogin.html'
