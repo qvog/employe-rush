@@ -13,18 +13,19 @@ class UserChangeForm(forms.UserChangeForm):
 
 class EmployerSignupForm(SignupForm):
 
-    def custom_signup(self, request, user):
-        user.type = CustomUser.Types.EMPLOYER
-        user.save()
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+    def custom_signup(self, request, user):
+        user.type = CustomUser.Types.EMPLOYER
+        user.save()
+        
 class WorkerSignupForm(SignupForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def custom_signup(self, request, user):
         user.type = CustomUser.Types.WORKER
         user.save()
     
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)

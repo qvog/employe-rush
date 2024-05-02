@@ -9,15 +9,15 @@
     <div class="mx-auto">
         <div class="mb-6 text-2xl">
             <strong> Логин: </strong> {{ request.user.username }} <br>
-            <strong> E-mail: </strong> {{ request.user.type }}  <br>
+            <strong> E-mail: </strong> {{ request.user.email }}  <br>
             <strong> Должность: </strong> Backend Developer <br>
             <strong> Город: </strong> Москва <br>
             <strong> Готов ли к переезду: </strong> Да <br>
-            <strong> Доп инфо: </strong> инфо <br>
-            <strong> Имя: </strong> Evgeniy <br>
-            <strong> Фамилия: </strong> Dyatlov <br>
+            <strong> Доп инфо: </strong> {{ request.user.type }}  <br>
+            <strong> Имя: </strong> {{ request.user.first_name }} <br>
+            <strong> Фамилия: </strong> {{ request.user.last_name }} <br>
             <a href="#" class="absolute top-28 right-96 px-6 h-200 w-200 ">
-                <img class="hover:shadow-lg rounded-xl" src="https://pm1.aminoapps.com/8283/8c6c8805ac73a9c90f0fbfa6b3758b40b88b1c80r1-800-802v2_uhq.jpg" width="200" height="200">
+                <img class="hover:shadow-lg rounded-xl" src="https://www.pngmart.com/files/22/User-Avatar-Profile-Transparent-Isolated-Background.png" width="200" height="200">
             </a>
         </div>
     </div>
@@ -29,9 +29,6 @@
                     <div class="flex justify-between">
                         <a href="#" class="text-2xl">Сбербанк</a>
                     </div>
-
-                    <hr>
-
                     <div class="mt-6 text-2xl">
                         Инженер-программист Golang
                     </div>
@@ -43,7 +40,7 @@
             </div>
         </div>
     </div>
-    <a href=#>
+    <a href={% url 'users:work_editprofile' %}>
         <button class="button-reply-link font-mono px-3 py-3 rounded-xl text-black bg-teal-300 hover:bg-teal-400">
         Редактировать
         </button>

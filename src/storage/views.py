@@ -1,13 +1,11 @@
-from .storage import Storage
-
-from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
-
+from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 
+from .storage import Storage
 
-class StorageAPI(APIView):
+
+class StoragePageView(APIView):
     permission_classes = [IsAuthenticated]
     context_object_name = 'storage'
 
@@ -15,12 +13,12 @@ class StorageAPI(APIView):
         storage = Storage(request)
 
         context = {
-            'storage': storage,
+            'storage': storage
         }
         
         return render(request, 'storage/savedvacancies.html', context)
     
-    def post(self, request, **kwargs):
+    def post(self, request, *args, **kwargs):
         storage = Storage(request)
 
         if request.POST.get('action') == 'add':
@@ -35,25 +33,3 @@ class StorageAPI(APIView):
             pass
 
         return response
-
-        """
-        storage = Storage(request)
-
-        if "remove" in request.data:
-            vacancies = request.data["vacancies"]
-            storage.remove(vacancies)
-
-        elif "clear" in request.data:
-            storage.clear()
-
-        else:
-            vacancies = request.data
-            storage.add(
-                    vacancies=vacancies["vacancies"],
-                    quantity=vacancies["quantity"]
-                )
-
-        return Response(
-            {"message": "storage updated"},
-            status=status.HTTP_202_ACCEPTED)
-        """

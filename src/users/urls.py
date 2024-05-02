@@ -2,25 +2,28 @@ from django.urls import path, include
 from django.contrib.auth import views
 
 from users.views import (
-    UserRedirectView, 
     WorkerSignupView, 
     WorkerLoginView, 
-    WorkerProfile, 
+    WorkerProfile,
+    WorkerProfileEdit, 
     EmployerProfile, 
-    EmployerSignupView
+    EmployerSignupView,
+    EmployerProfileEdit
     )
 
 
 app_name = 'users'
 
 urlpatterns = [
-    path('signup/', WorkerSignupView.as_view(), name='worksignup'),
-    path('signup/emp/', EmployerSignupView.as_view(), name='empsignup'),
-    path('login/', WorkerLoginView.as_view(), name='worklogin'),
-    path('~redirect/', UserRedirectView.as_view(), name="redirect"),
     path('logout/', views.LogoutView.as_view(), name='logout'),
 
-    path('profile/', WorkerProfile.as_view(), name='workprofile'),
-    path('profile/emp/', EmployerProfile.as_view(), name='emprofile'),
+    path('signup/', WorkerSignupView.as_view(), name='work_signup'),
+    path('login/', WorkerLoginView.as_view(), name='work_login'),
+    path('profile', WorkerProfile.as_view(), name='work_profile'),
+    path('profile/edit', WorkerProfileEdit.as_view(), name='work_editprofile'),
+
+    path('signup/emp/', EmployerSignupView.as_view(), name='emp_signup'),
+    path('profile/emp/', EmployerProfile.as_view(), name='emp_profile'),
+    path('profile/emp/edit', EmployerProfileEdit.as_view(), name='emp_editprofile'),
 ]
 

@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+
+{% block title %}Изменить профиль{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto p-6">
+    <h1 class="mb-5 text-3xl">Редактировать профиль</h1>
+
+    <form method="post" action="{% url 'users:emp_editprofile' %}" class="space-y-3">
+        {% csrf_token %}
+        
+        <div>
+            <label>Имя</label>
+            <input name="first_name" value="{{ request.user.first_name }}" type="text" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
+        </div>
+
+        <div>
+            <label>Фамилия</label>
+            <input name="last_name" value="{{ request.user.last_name }}" type="text" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
+        </div>
+
+        <div>
+            <label>Логин</label>
+            <input name="username" value="{{ request.user.username }}" type="text" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
+        </div>
+
+        <div>
+            <label>E-mail</label>
+            <input name="email" value="{{ request.user.email }}" type="email" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
+        </div>
+
+        <a href={% url 'users:work_profile' %}>
+            <button class="button-reply-link font-mono px-3 py-3 rounded-xl text-black bg-teal-300 hover:bg-teal-400">
+            Изменить
+            </button>
+        </a>
+    </form>
+</div>
+{% endblock %}

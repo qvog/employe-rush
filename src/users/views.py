@@ -1,22 +1,35 @@
 from allauth.account.views import LoginView, SignupView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
+from django.views.generic import TemplateView
+from django.shortcuts import render, redirect
 
-from django.views.generic import RedirectView, TemplateView
 
 from users.forms import EmployerSignupForm, WorkerSignupForm
+from .models import CustomUser
 
 
 class EmployerSignupView(SignupView, TemplateView):
-    template_name = 'users/employer/empsignup.html'
+    template_name = 'users/employer/emp_signup.html'
     form_class = EmployerSignupForm
 
     def get_context_data(self, **kwargs):
         kwargs['employer_form'] = EmployerSignupForm
-        return super().get_context_data(**kwargs) 
+        return super().get_context_data(**kwargs)
+
+class EmployerProfile(LoginRequiredMixin, TemplateView):
+    template_name = 'users/employer/emp_profile.html'
+
+class EmployerProfileEdit(LoginRequiredMixin, TemplateView):
+    template_name = 'users/employer/emp_editprofile.html'
+    
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        user.username = request.POST.get('username')
+        user.save()
+        return redirect('/')
 
 class WorkerSignupView(SignupView, TemplateView):
-    template_name = 'users/worker/worksignup.html'
+    template_name = 'users/worker/work_signup.html'
     form_class = WorkerSignupForm
 
     def get_context_data(self, **kwargs):
@@ -24,22 +37,14 @@ class WorkerSignupView(SignupView, TemplateView):
         return super().get_context_data(**kwargs)
 
 class WorkerLoginView(LoginView, TemplateView):
-    template_name = 'users/worker/worklogin.html'
+    template_name = 'users/worker/work_login.html'
 
 class WorkerProfile(LoginRequiredMixin, TemplateView):
-    template_name = 'users/worker/workprofile.html'
+    template_name = 'users/worker/work_profile.html'
 
-class EmployerProfile(LoginRequiredMixin, TemplateView):
-    template_name = 'users/employer/emprofile.html'
+class WorkerProfileEdit(LoginRequiredMixin, TemplateView):
+    template_name = 'users/worker/work_editprofile.html'
 
 
-class UserRedirectView(LoginRequiredMixin, RedirectView):
-    permanent = False
-
-    def get_redirect_url(self):
-        return reverse(
-            "users:detail",
-            kwargs={"username": self.request.user.username},
-        )
 
 

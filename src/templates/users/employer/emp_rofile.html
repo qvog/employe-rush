@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+
+{% block title %} Мой профиль {% endblock %}
+
+{% block content %}
+
+<div class="max-w-6xl mx-auto p-6 px-6">
+    <h1 class="mb-6 text-4xl">Профиль</h1>
+    <div class="mx-auto">
+        <div class="mb-6 text-2xl">
+            <strong> Логин: </strong> {{ request.user.username }} <br>
+            <strong> Тип: </strong> {{ request.user.type }}  <br>
+            <strong> Email:  </strong> {{ request.user.email }} <br>
+            <strong> Название компании: </strong> {{ request.user.name }} <br>
+            <strong> Доп инфо: </strong> инфо <br>
+            <a href="#" class="absolute top-28 right-96 px-6 h-200 w-200 ">
+                <img class="hover:shadow-lg rounded-xl" src="https://static.vecteezy.com/system/resources/thumbnails/023/986/562/small/telegram-logo-telegram-logo-transparent-telegram-icon-transparent-free-free-png.png" width="200" height="200">
+            </a>
+        </div>
+    </div>
+    <h2 class="my-6 text-2xl">Описание:</h2>
+    <div class="w-full mb-6 p-5 flex flex-wrap bg-gray-100 rounded-xl">
+        <div class="mb-6 w-full">
+            <div class="product mb-6 flex pr-6">
+                <div class="w-3/4 pl-6">
+                    <div class="flex justify-between">
+                        <a href="#" class="text-2xl">Lorem ipsum dolor sit amet 
+                        consectetur adipisicing elit. Explicabo, beatae tempore 
+                        doloremque adipisci consequuntur commodi optio illum! Q
+                        uidem eius explicabo, earum corporis optio et eum unde veritatis, 
+                        obcaecati cumque voluptates!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href={% url 'users:emp_editprofile' %}>
+        <button class="button-reply-link font-mono px-3 py-3 rounded-xl text-black bg-teal-300 hover:bg-teal-400">
+        Редактировать
+        </button>
+    </a>
+</div>
+
+
+{% endblock %}

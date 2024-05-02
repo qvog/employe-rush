@@ -2,9 +2,7 @@ from django.shortcuts import render
 from django.db.models import Q
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import status
 
 from .models import Vacancy
 from .serializers import VacancySerializer
@@ -12,6 +10,7 @@ from .serializers import VacancySerializer
 
 class VacanciesPageView(APIView):
     model = Vacancy
+    permission_classes = [IsAuthenticated]
     context_object_name = 'vacancies'
 
     serializer_class = VacancySerializer
@@ -29,8 +28,7 @@ class VacanciesPageView(APIView):
 
         return render(request, 'vacancies/vacancies.html', context)
 
-class VacancyDetailAPI(APIView):
-    permission_classes = [IsAuthenticated]
+class VacancyDetailView(APIView):
 
     def get(self, request, vacancy_id):
         vacancy = Vacancy.objects.get(id=vacancy_id)
