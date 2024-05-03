@@ -26,6 +26,7 @@ class EmployerProfileEdit(LoginRequiredMixin, TemplateView):
         user = request.user
         user.username = request.POST.get('username')
         user.save()
+        #test branch
         return redirect('/')
 
 class WorkerSignupView(SignupView, TemplateView):
