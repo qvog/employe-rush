@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
+
+from users.models import EmployerMore
 
 class Category(models.Model):
 
@@ -23,8 +26,8 @@ class Vacancy(models.Model):
         TEMPORARY = "TEMPORARY", _("Временно")
 
     category = models.ForeignKey(Category, related_name='vacancies', on_delete=models.CASCADE, null=True)
+    employer = models.ForeignKey(EmployerMore, related_name='employer', on_delete=models.CASCADE, null=True)
     name = models.CharField(_("Name of vacancy"), max_length=30, null=True)
-    company_name = models.CharField(_("Name of company"), max_length=30, null=True)
     city = models.CharField(_("The city of job"), max_length=30, null=True)
     salary = models.IntegerField(blank=True, null=True)
     slug = models.SlugField(max_length=50, unique=True, null=True)
@@ -39,4 +42,5 @@ class Vacancy(models.Model):
         ordering = ('-created_at', )  
 
     def __str__(self):
-        return self.name
+        return f'{self.name} {self.employer}'
+    
