@@ -37,6 +37,7 @@ venv/
 .Python
 env/
 build/
+media/
 develop-eggs/
 dist/
 downloads/
