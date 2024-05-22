@@ -6,7 +6,7 @@
 <div class="max-w-6xl mx-auto p-6">
     <h1 class="mb-5 text-3xl">Редактировать профиль</h1>
 
-    <form method="post" action="{% url 'users:emp_editprofile' %}" class="space-y-3">
+    <form method="post" action={% url 'users:work_editprofile' %} class="space-y-3">
         {% csrf_token %}
         
         <div>
@@ -28,12 +28,33 @@
             <label>E-mail</label>
             <input name="email" value="{{ request.user.email }}" type="email" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
         </div>
-
-        <a href={% url 'users:work_profile' %}>
-            <button class="button-reply-link font-mono px-3 py-3 rounded-xl text-black bg-teal-300 hover:bg-teal-400">
+        <div>
+            <label>О себе</label>
+            <input name="bio" value="{{ request.user.workermore.bio }}" type="text" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
+        </div>
+        <div>
+            <label>Город</label>
+            <input name="city" value="{{ request.user.workermore.city }}" type="text" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
+        </div>
+        <div>
+            <label>Готов ли к переезду</label>
+            <input name="ready_to_relocate" value="{{ request.user.workermore.ready_to_relocate }}" type="text" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
+        </div>
+        <div>
+            <label>Должность</label>
+            <input name="position" value="{{ request.user.workermore.position }}" type="text" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
+        </div>
+        <div>
+            <label>Telegram</label>
+            <input name="telegram_username" value="{{ request.user.workermore.telegram_username }}" type="text" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
+        </div>
+        <div>
+            <label>Github</label>
+            <input name="github_username" value="{{ request.user.workermore.github_username }}" type="text" class="w-full mt-2 py-4 px-6 bg-gray-100 rounded-xl">
+        </div>
+        <button class="button-reply-link font-mono px-3 py-3 rounded-xl text-black bg-teal-300 hover:bg-teal-400">
             Изменить
-            </button>
-        </a>
+        </button>
     </form>
 </div>
 {% endblock %}

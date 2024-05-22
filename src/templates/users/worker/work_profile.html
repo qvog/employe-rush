@@ -10,14 +10,17 @@
         <div class="mb-6 text-2xl">
             <strong> Логин: </strong> {{ request.user.username }} <br>
             <strong> E-mail: </strong> {{ request.user.email }}  <br>
-            <strong> Должность: </strong> Backend Developer <br>
-            <strong> Город: </strong> Москва <br>
-            <strong> Готов ли к переезду: </strong> Да <br>
-            <strong> Доп инфо: </strong> {{ request.user.type }}  <br>
+            <strong> КТО Я: </strong> {{ request.user.type }} <br>
             <strong> Имя: </strong> {{ request.user.first_name }} <br>
             <strong> Фамилия: </strong> {{ request.user.last_name }} <br>
+            <strong> О себе: </strong> {{ request.user.workermore.bio }} <br>
+            <strong> Город: </strong> {{ request.user.workermore.city }} <br>
+            <strong> Готов к переезду: </strong> {{ request.user.workermore.ready_to_relocate }} <br>
+            <strong> Должность: </strong> {{ request.user.workermore.position }} <br>
+            <strong> Telegram: </strong> {{ request.user.workermore.telegram_username }} <br>
+            <strong> Github: </strong> {{ request.user.workermore.github_username }} <br>
             <a href="#" class="absolute top-28 right-96 px-6 h-200 w-200 ">
-                <img class="hover:shadow-lg rounded-xl" src="https://www.pngmart.com/files/22/User-Avatar-Profile-Transparent-Isolated-Background.png" width="200" height="200">
+                <img class="hover:shadow-lg rounded-xl" src="{{ request.user.avatar.url }}" width="200" height="200">
             </a>
         </div>
     </div>

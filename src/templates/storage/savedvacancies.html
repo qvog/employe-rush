@@ -67,8 +67,8 @@
                         action: 'add'
                     },
                     success: function(data) {
-                    $('.vacancy-link-1').html(data.company_name);
-                    $('.vacancy-link-2').html(data.name);
+                    $('.vacancy-link-1').html(data.name);
+                    $('.vacancy-link-2').html(data.employer);
                     $('.vacancy-link-3').html(data.city);
                     $('.vacancy-link-4').html('<p>От &nbsp </p>' + data.salary + '<p> &nbsp руб.</p>');
                     $('.vacancy-link-5').html(data.description);;
