@@ -2,7 +2,11 @@ from django.utils.translation import gettext_lazy as _
 from allauth.account.forms import SignupForm
 from django import forms
 
-from .models import CustomUser, WorkerMore, EmployerMore
+from .models import (
+    CustomUser, 
+    WorkerMore, 
+    EmployerMore
+    )
 
 
 class EmployerSignupForm(SignupForm):
@@ -14,9 +18,6 @@ class EmployerSignupForm(SignupForm):
         user.type = CustomUser.Types.EMPLOYER
         user.save()
 
-class EmployerUpdateForm(forms.ModelForm):
-    pass
-        
 class WorkerSignupForm(SignupForm):
 
     def __init__(self, *args, **kwargs):

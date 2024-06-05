@@ -109,6 +109,26 @@
                     },
                 });
             })
+            $(".button-reply-link").on( "click", function() {
+                var currentId = globalId;
+                event.preventDefault();
+                $.ajax({
+                    url: '{% url "storage:replyes" %}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        vacancy: currentId,
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        action: 'reply'
+                    },
+                    success: function (data) {
+                        console.log(data)
+                    },
+                    error: function (response) {
+                        console.log('error')
+                    },
+                });
+            })
         })
     </script>
 

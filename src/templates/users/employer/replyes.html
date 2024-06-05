@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="h-screen flex">
+    <div class="relative md:container md:mx-auto h-full bg-white py-6">
+        <div class="border-b-2 border-gray-400 my-6">
+            <div class="absolute left-1/2 -ml-0.5 w-0.5 h-screen bg-gray-400"></div>
+        </div>
+        <div class="relative mx-8">
+            <ul class="vacancies absolute inset-y-0 left-0 divide-y divide-gray-200 dark:divide-gray-700">
+                {% for item in employer_storage %}
+                {% with vacancy=item.vacancies %}
+                <li class="px-16 pb-3 sm:pb-4">
+                    {% include 'storage/partials/vacancy_single.html' %}                                      
+                </li>
+                {% endwith %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="relative">
+            <div class="absolute left-1/2 mx-8">
+                <div class="max-w-6xl mx-auto flex flex-wrap py-4 px-4 xl:px-0">
+                    <div class="vacancy-detail-container w-full">
+                        <p class="vacancy-link-1 flex text-3xl font-medium text-gray-900 hover:text-gray-600 truncate">
+                        </p>
+                        <p class="vacancy-link-2 flex text-4xl font-medium text-gray-900 hover:text-gray-600 truncate">
+                        </p>
+                        <p class="vacancy-link-3 flex text-xl font-medium text-gray-600 truncate">
+                        </p>
+                        <p class="vacancy-link-4 flex text-xl font-medium my-6 text-black truncate">
+                        </p>
+                        <h class="vacancy-link-5 flex text-lg font-medium my-6 text-black">
+                        </h>
+                        <p class="vacancy-link-6 flex text-xl font-medium my-6 text-black truncate">
+                        </p>
+                    </div>
+                    <div class="inline-flex" id="success" style="display: none;">
+                        <button class="button-remove-link font-mono px-3 py-3 rounded-xl text-black bg-red-200 hover:bg-red-300"> 
+                            Удалить 
+                        </button>
+                        <button class="font-mono px-3 py-3 rounded-xl text-black bg-teal-300 hover:bg-teal-400"> 
+                            Откликнуться 
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

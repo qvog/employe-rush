@@ -31,6 +31,8 @@
          </p>           
     </div>
     <div class="break-keep w-1/12 font-semibold text-gray-900 dark:text-black">
+        {% if vacancy.salary %}
         От {{ vacancy.salary }} рублей.
+        {% endif %}
     </div>
 </div>  

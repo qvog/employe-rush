@@ -8,7 +8,7 @@ from users.views import (
     WorkerProfileEdit, 
     EmployerProfile, 
     EmployerSignupView,
-    EmployerProfileEdit
+    EmployerProfileEdit,
     )
 
 

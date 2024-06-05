@@ -38,7 +38,7 @@
                         <button class="button-remove-link font-mono px-3 py-3 rounded-xl text-black bg-red-200 hover:bg-red-300"> 
                             Удалить 
                         </button>
-                        <button class="font-mono px-3 py-3 rounded-xl text-black bg-teal-300 hover:bg-teal-400"> 
+                        <button class="button-reply-link font-mono px-3 py-3 rounded-xl text-black bg-teal-300 hover:bg-teal-400"> 
                             Откликнуться 
                         </button>
                     </div>
@@ -92,6 +92,26 @@
                     },
                     error: function (response) {
                         window.location.reload();
+                    },
+                });
+            })
+            $(".button-reply-link").on( "click", function() {
+                var currentId = globalId;
+                event.preventDefault();
+                $.ajax({
+                    url: '{% url "storage:replyes" %}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        vacancy: currentId,
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        action: 'reply'
+                    },
+                    success: function (data) {
+                        console.log(data)
+                    },
+                    error: function (response) {
+                        console.log('error')
                     },
                 });
             })

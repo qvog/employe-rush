@@ -6,13 +6,14 @@ from rest_framework.permissions import IsAuthenticated
 
 from .models import Vacancy
 from .serializers import VacancySerializer
+from users.mixins import WorkerRequiredMixin
 
 
-class VacanciesPageView(APIView):
+class VacanciesPageView(WorkerRequiredMixin, APIView):
     model = Vacancy
     permission_classes = [IsAuthenticated]
     context_object_name = 'vacancies'
-
+    
     serializer_class = VacancySerializer
 
     def get(self, request):
@@ -25,7 +26,7 @@ class VacanciesPageView(APIView):
         context = {
             'vacancies': vacancies,
         }
-
+        
         return render(request, 'vacancies/vacancies.html', context)
 
 class VacancyDetailView(APIView):

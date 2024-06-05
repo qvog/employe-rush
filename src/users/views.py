@@ -1,10 +1,15 @@
 from allauth.account.views import LoginView, SignupView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 from django.shortcuts import render, redirect
-from django.contrib import messages
 
-from users.forms import EmployerSignupForm, WorkerSignupForm, UpdateForm, WorkerUpdateFormMore
+from .mixins import EmployerRequiredMixin, WorkerRequiredMixin
+from users.forms import (
+    EmployerSignupForm, 
+    WorkerSignupForm, 
+    UpdateForm, 
+    WorkerUpdateFormMore, 
+    EmployerUpdateFormMore
+    )
 
 
 class EmployerSignupView(SignupView, TemplateView):
@@ -14,11 +19,11 @@ class EmployerSignupView(SignupView, TemplateView):
     def get_context_data(self, **kwargs):
         kwargs['employer_form'] = EmployerSignupForm
         return super().get_context_data(**kwargs)
-
-class EmployerProfile(LoginRequiredMixin, TemplateView):
+    
+class EmployerProfile(EmployerRequiredMixin, TemplateView):
     template_name = 'users/employer/emp_profile.html'
 
-class EmployerProfileEdit(LoginRequiredMixin, TemplateView):
+class EmployerProfileEdit(EmployerRequiredMixin, TemplateView):
     template_name = 'users/employer/emp_editprofile.html'
 
     def post(self, request):
@@ -44,10 +49,10 @@ class WorkerSignupView(SignupView, TemplateView):
 class WorkerLoginView(LoginView, TemplateView):
     template_name = 'users/worker/work_login.html'
 
-class WorkerProfile(LoginRequiredMixin, TemplateView):
+class WorkerProfile(WorkerRequiredMixin, TemplateView):
     template_name = 'users/worker/work_profile.html'
 
-class WorkerProfileEdit(LoginRequiredMixin, TemplateView):
+class WorkerProfileEdit(WorkerRequiredMixin, TemplateView):
     template_name = 'users/worker/work_editprofile.html'
     
     def post(self, request):

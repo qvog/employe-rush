@@ -13,7 +13,7 @@ class CustomUser(AbstractUser):
 
     base_type = Types.WORKER
     type = models.CharField(max_length=50, choices=Types.choices, default=base_type)
-    avatar = models.ImageField(upload_to='profile_images')
+    avatar = models.ImageField(upload_to='profile_images', blank=True)
 
     def get_absolute_url(self):
         return reverse("users_detail", kwargs={"username": self.username})
@@ -63,7 +63,7 @@ class Worker(CustomUser):
     @property
     def more(self):
         return self.workermore
-
+    
     class Meta:
         proxy = True
 

@@ -19,9 +19,11 @@
             <strong> Должность: </strong> {{ request.user.workermore.position }} <br>
             <strong> Telegram: </strong> {{ request.user.workermore.telegram_username }} <br>
             <strong> Github: </strong> {{ request.user.workermore.github_username }} <br>
+            {% if request.user.workermore.avatar %}
             <a href="#" class="absolute top-28 right-96 px-6 h-200 w-200 ">
                 <img class="hover:shadow-lg rounded-xl" src="{{ request.user.avatar.url }}" width="200" height="200">
             </a>
+            {% endif %}
         </div>
     </div>
     <h2 class="my-6 text-2xl">Опыт работы:</h2>
