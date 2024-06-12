@@ -1,9 +1,23 @@
 from django.db import models
-from .storage import Storage
+from django.conf import settings
 
-class EmployerStorage(Storage):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+from vacancies.models import Vacancy
+
+class DefaultStorage(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    vacancy = models.ForeignKey(Vacancy, on_delete=models.CASCADE)
+    saved_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ('user', 'vacancy')
+
+class ReplyeStorage(DefaultStorage):
+    class Meta:
+        pass
+
+
+
+
 
 
 

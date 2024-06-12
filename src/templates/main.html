@@ -21,7 +21,7 @@
                     {% if request.user.type == "WORKER" %}
                     <li><a href="{% url 'vacancies:vacancies' %}"class="font-mono text-black hover:text-gray-600">Вакансии</a></li>
                     {% else %}  
-                    <li><a href="{% url 'storage:replyes' %}"class="font-mono text-black hover:text-gray-600">Отклики</a></li>
+                    <li><a href="#"class="font-mono text-black hover:text-gray-600">Отклики</a></li>
                     {% endif %}
                 </ul>
             </div>

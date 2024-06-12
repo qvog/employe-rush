@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Vacancy
-from users.models import EmployerMore
 
 class VacancySerializer(serializers.ModelSerializer):
     employer = serializers.StringRelatedField()

@@ -8,12 +8,47 @@
         </div>
         <div class="relative mx-8">
             <ul class="vacancies absolute inset-y-0 left-0 divide-y divide-gray-200 dark:divide-gray-700">
-                {% for item in storage %}
-                {% with vacancy=item.vacancies %}
+                {% for vacancy in storage %}
                 <li class="px-16 pb-3 sm:pb-4">
-                    {% include 'storage/partials/vacancy_single.html' %}                                      
+                    <div class="flex items-center space-x-4">
+                        <div class="flex-shrink-0">
+                           <img class="w-8 h-8 rounded-full" src="https://cdn.sberdevices.ru/static/services/target/5d9b9ae7-305f-4d78-9f45-5e6b9597be90/ca858c65-8e7a-458c-8120-6882e9ff19b1.png" alt="Neil image">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                             <a href="#" data-id="{{ vacancy.id }}" class="vacancy-link flex text-xl font-medium text-gray-900 hover:text-gray-600 truncate dark:text-black">
+                                 {{ vacancy.name }}
+                             </a>
+                             <a href="#" class="flex text-2xl text-gray-900 hover:text-gray-600">
+                                 {{ vacancy.employer }}
+                             </a>                                                       
+                             <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                {{ vacancy.city }} / 
+                                {% if vacancy.workhome == False %} Офис
+                                {% else %} Из дома
+                                {% endif %} / 
+                                {% if vacancy.jobtype == 'FULL' %} Full-time
+                                {% elif vacancy.jobtype == 'PART' %} Part-Time
+                                {% elif vacancy.jobtype == 'TRAINEE' %} Стажировка
+                                {% elif vacancy.jobtype == 'TEMPORARY' %} Проектная работа
+                                {% endif %}
+                             </p>
+                             <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                Требуемый опыт работы:
+                                 {% if vacancy.experience == 'SIX' %} Более шести лет
+                                 {% elif vacancy.experience == 'NOEXP'%} Без опыта
+                                 {% elif vacancy.experience == 'INTERN'%} После стажировки
+                                 {% elif vacancy.experience == '3TO6'%} От 3 до 6 лет
+                                 {% elif vacancy.experience == '1TO3' %} От 1 до 3 лет
+                                 {% endif %}
+                             </p>           
+                        </div>
+                        <div class="break-keep w-1/12 font-semibold text-gray-900 dark:text-black">
+                            {% if vacancy.salary %}
+                            От {{ vacancy.salary }} рублей.
+                            {% endif %}
+                        </div>
+                    </div>                                     
                 </li>
-                {% endwith %}
                 {% endfor %}
             </ul>
         </div>
@@ -99,7 +134,7 @@
                 var currentId = globalId;
                 event.preventDefault();
                 $.ajax({
-                    url: '{% url "storage:replyes" %}',
+                    url: '#',
                     type: 'POST',
                     dataType: 'json',
                     data: {
