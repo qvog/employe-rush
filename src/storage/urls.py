@@ -7,5 +7,5 @@ app_name = 'storage'
 
 urlpatterns = [
     path('', StoragePageView.as_view(), name='savedvacancies.html'),
-    path('replyes', EmployerReplyesView.as_view(), name='replyes')
+    path('replyes', EmployerReplyesView.as_view(), name='replyes.html')
 ]

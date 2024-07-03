@@ -2,7 +2,6 @@ from django.conf import settings
 
 from vacancies.serializers import VacancySerializer
 from vacancies.models import Vacancy
-from storage.models import DefaultStorage
 
 
 class Storage:
@@ -41,26 +40,16 @@ class Storage:
 
         self.save()
 
-    def remove(self, user, vacancies_id):
+    def remove(self, vacancies_id):
         vacancies_id = str(vacancies_id)
 
         if vacancies_id in self.storage:
             del self.storage[vacancies_id]
             self.save()
-        
-        DefaultStorage.objects.filter(user=user, vacancy_id=vacancies_id).delete()
 
     def clear(self):
         del self.session[settings.STORAGE_SESSION_ID]
         self.session.modified = True
     
-    def transfer_to_db(self, user):
-        vacancies_ids = self.storage.keys()
-        vacancies = Vacancy.objects.filter(id__in=vacancies_ids)
-
-        for vac in vacancies:
-            DefaultStorage.objects.get_or_create(user=user, vacancy=vac)
-        
-        self.clear()
-
+    
         

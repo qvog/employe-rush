@@ -6,16 +6,11 @@
         <div class="border-b-2 border-gray-400 my-6">
             <div class="absolute left-1/2 -ml-0.5 w-0.5 h-screen bg-gray-400"></div>
         </div>
-        <div class="relative mx-8">
-            <ul class="vacancies absolute inset-y-0 left-0 divide-y divide-gray-200 dark:divide-gray-700">
-                {% for item in employer_storage %}
-                {% with vacancy=item.vacancies %}
-                <li class="px-16 pb-3 sm:pb-4">
-                    {% include 'storage/partials/vacancy_single.html' %}                                      
-                </li>
-                {% endwith %}
-                {% endfor %}
-            </ul>
+        {% for vacancy in replye_storage %}
+        <ul class="relative size-2/4 inset-y-0 left-0 divide-y divide-gray-200 dark:divide-gray-700">
+            {% include 'storage/partials/replye_single.html' %}
+        </ul>
+        {% endfor %}
         </div>
         <div class="relative">
             <div class="absolute left-1/2 mx-8">

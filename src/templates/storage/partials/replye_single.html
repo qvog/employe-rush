@@ -1,0 +1,16 @@
+<div class="p-4 border-2 border-gray-400 sm:pb-4">
+    <li>
+        <div class="box-content border-gray-400 mb-6 text-2xl">
+            <strong> Логин: </strong> {{ user }} <br>
+            <strong> Имя: </strong> {{ user.first_name }}  <br>
+            <strong> Фамилия:  </strong> {{ user.last_name }} <br>
+            <strong> Опыт: </strong> {{ user.type }} <br>
+            <strong> {{ user.workermore.position }} </strong>  <br>
+        </div>
+        <div dir="rtl">
+            <div class="absolute top-10 start-12">
+                <img class="w-32 h-32 rounded-full" src="https://s3-symbol-logo.tradingview.com/sberbank--600.png" alt="Neil image">
+            </div>
+        </div>                          
+    </li>
+</div>

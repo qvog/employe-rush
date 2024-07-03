@@ -13,8 +13,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 STORAGE_SESSION_ID = 'storage'
-SESSION_COOKIE_AGE = 87000
+SESSION_COOKIE_AGE = 1209600
 
 INSTALLED_APPS = [
     'django.contrib.admin',
