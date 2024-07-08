@@ -13,9 +13,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
-STORAGE_SESSION_ID = 'storage'
-SESSION_COOKIE_AGE = 1209600
+#STORAGE_SESSION_ID = 'storage'
+#SESSION_COOKIE_AGE = 1209600
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
+CACHE_TIMEOUT = 60 * 60 * 24 * 7
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -32,6 +35,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'django_extensions',
+    'django_redis',
 
     'core',
     'users',
@@ -95,6 +99,17 @@ DATABASES = {
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'NAME': os.getenv('POSTGRES_NAME')
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': os.getenv('REDIS_URL'),
+        "KEY_PREFIX": "employe",
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
     }
 }
 

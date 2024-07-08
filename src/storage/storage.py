@@ -1,20 +1,16 @@
 from django.conf import settings
+from django.core.cache import cache
 
 from vacancies.serializers import VacancySerializer
 from vacancies.models import Vacancy
 
 
 class Storage:
+    def __init__(self, user):
+        self.user = user
+        self.cache_key = f"storage_{user.id}"
+        self.storage = cache.get(self.cache_key, {})
 
-    def __init__(self, request):
-        self.session = request.session
-        storage = self.session.get(settings.STORAGE_SESSION_ID)
-
-        if not storage:
-            storage = self.session[settings.STORAGE_SESSION_ID] = {}
-
-        self.storage = storage
-    
     def __iter__(self):
         vacancies_ids = self.storage.keys()
         vacancies = Vacancy.objects.filter(id__in=vacancies_ids)
@@ -27,8 +23,7 @@ class Storage:
             yield item
 
     def save(self):
-        self.session[settings.STORAGE_SESSION_ID] = self.storage
-        self.session.modified = True
+        cache.set(self.cache_key, self.storage, settings.CACHE_TIMEOUT)
 
     def add(self, vacancies_id):
         vacancies_id = str(vacancies_id)
@@ -48,8 +43,7 @@ class Storage:
             self.save()
 
     def clear(self):
-        del self.session[settings.STORAGE_SESSION_ID]
-        self.session.modified = True
+        cache.delete(self.cache_key)
     
     
         

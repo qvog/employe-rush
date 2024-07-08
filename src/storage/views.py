@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.decorators import login_required
 
 from .storage import Storage
 from users.mixins import WorkerRequiredMixin, EmployerRequiredMixin
@@ -11,7 +12,7 @@ class StoragePageView(WorkerRequiredMixin, APIView):
     context_object_name = 'storage'
 
     def get(self, request):
-        storage = Storage(request)
+        storage = Storage(request.user)
 
         context = {
             'storage': storage
@@ -20,7 +21,7 @@ class StoragePageView(WorkerRequiredMixin, APIView):
         return render(request, 'storage/savedvacancies.html', context)
 
     def post(self, request, *args, **kwargs):
-        storage = Storage(request)
+        storage = Storage(request.user)
 
         if request.POST.get('action') == 'add':
             vacancy_id = request.POST.get('vacancy')
@@ -42,11 +43,10 @@ class EmployerReplyesView(APIView):
     context_object_name = 'replye_storage'
 
     def get(self, request):
-
-        storage = request(Storage)
+        storage = Storage(request.user)
 
         context = {
-            'replye_storage': storage
+            'storage': storage
         }
         
         return render(request, 'storage/replyes.html', context)
